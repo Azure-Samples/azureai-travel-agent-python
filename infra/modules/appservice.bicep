@@ -118,7 +118,7 @@ resource backend 'Microsoft.Web/sites@2023-12-01' = {
         }
         {
           name: 'AZURE_AI_PROJECT_CONNECTION_STRING'
-          value: '${split(aiProject.properties.discoveryUrl, '/')[2]};${subscription().subscriptionId};${resourceGroup().name};${aiHubName}'
+          value: '${split(aiProject.properties.discoveryUrl, '/')[2]};${subscription().subscriptionId};${resourceGroup().name};${aiProjectName}'
         }
         {
           name: 'SSO_ENABLED'
@@ -219,6 +219,10 @@ resource backend 'Microsoft.Web/sites@2023-12-01' = {
         {
           name: 'DEBUG'
           value: 'true'
+        }
+        {
+          name:'AZURE_KEY_VAULT_ENDPOINT'
+          value: keyVault.properties.vaultUri
         }
       ]
     }

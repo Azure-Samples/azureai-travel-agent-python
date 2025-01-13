@@ -11,6 +11,5 @@ botbuilder-dialogs==4.16.1
 botbuilder-integration-aiohttp==4.16.1
 python-dotenv==1.0.1
 pytest-aiohttp==1.0.5
-openai==1.41.0
-
+openai==1.55.3
 azure_ai_projects-1.0.0b1-py3-none-any.whl

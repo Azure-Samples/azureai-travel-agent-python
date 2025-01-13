@@ -176,6 +176,32 @@ resource aiDeveloperAccess 'Microsoft.Authorization/roleAssignments@2022-04-01' 
   }
 ]
 
+resource aiDeveloperAccessProj 'Microsoft.Authorization/roleAssignments@2022-04-01' = [
+  for principal in grantAccessTo: if (!empty(principal.id)) {
+    name: guid(principal.id, aiProject.id, aiDeveloper.id)
+    scope: aiProject
+    properties: {
+      roleDefinitionId: aiDeveloper.id
+      principalId: principal.id
+      principalType: principal.type
+    }
+  }
+]
+
+resource cognitiveServicesOpenAIContributor 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
+  name: 'a001fd3d-188f-4b5d-821b-7da978bf7442'
+}
+
+resource openaiAccessFromProject 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+    name: guid(aiProject.id, aiServices.id, cognitiveServicesOpenAIContributor.id)
+    scope: aiServices
+    properties: {
+      roleDefinitionId: cognitiveServicesOpenAIContributor.id
+      principalId: aiProject.identity.principalId
+      principalType: 'ServicePrincipal'
+    }
+}
+
 
 output aiHubID string = aiHub.id
 output aiHubName string = aiHub.name

@@ -37,7 +37,7 @@ from routes.api.directline import directline_routes
 from routes.api.files import file_routes
 from routes.static.static import static_routes
 
-load_dotenv()
+load_dotenv(".env")
 
 def create_app(adapter: CloudAdapter, bot: ActivityHandler, agents_client: AgentsOperations, secret_client: SecretClient) -> web.Application:
     app = web.Application(middlewares=[aiohttp_error_middleware])
